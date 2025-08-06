@@ -1,10 +1,15 @@
-import "./globals.css";
-import Providers from "@/components/Providers"; // <- Import the client wrapper
-import type { Metadata } from "next";
+import './globals.css';
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import { CartProvider } from '@/contexts/CartContext';
+import { AuthProvider } from '@/contexts/AuthContext';
+import { Toaster } from '@/components/ui/sonner';
+
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "My Auth App",
-  description: "Authentication with NextAuth and MongoDB",
+  title: 'ShopNext - Premium E-commerce Store',
+  description: 'Discover amazing products at unbeatable prices',
 };
 
 export default function RootLayout({
@@ -14,8 +19,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
-        <Providers>{children}</Providers> {/* Wrap here */}
+      <body className={inter.className}>
+        <AuthProvider>
+          <CartProvider>
+            {children}
+            <Toaster />
+          </CartProvider>
+        </AuthProvider>
       </body>
     </html>
   );

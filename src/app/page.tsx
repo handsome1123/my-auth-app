@@ -1,23 +1,21 @@
-'use client';
-
-import { useSession, signIn, signOut } from "next-auth/react";
+import { Header } from '@/components/layout/Header';
+import { Hero } from '@/components/home/Hero';
+import { FeaturedProducts } from '@/components/home/FeaturedProducts';
+import { Categories } from '@/components/home/Categories';
+import { Newsletter } from '@/components/home/Newsletter';
+import { Footer } from '@/components/layout/Footer';
 
 export default function Home() {
-  const { data: session } = useSession();
-
   return (
-    <main>
-      {session ? (
-        <>
-          <p>Welcome, {session.user?.name}!</p>
-          <button onClick={() => signOut()}>Sign out</button>
-        </>
-      ) : (
-        <>
-          <p>You are not signed in</p>
-          <button onClick={() => signIn()}>Sign in</button>
-        </>
-      )}
-    </main>
+    <div className="min-h-screen bg-background">
+      <Header />
+      <main>
+        <Hero />
+        <Categories />
+        <FeaturedProducts />
+        <Newsletter />
+      </main>
+      <Footer />
+    </div>
   );
 }
